@@ -10,7 +10,7 @@ namespace AvioKompanija.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Home Paaage";
 
             return View();
         }
