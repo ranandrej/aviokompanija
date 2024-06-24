@@ -74,5 +74,54 @@ function updateTable(data) {
     });
    
 }
+function loadLetovi() {
+    var tableBody = $('#flightTable');
 
+    $.get("/api/letovi", function (data, status) {
+
+        $.each(data, function (index, flight) {
+            var imgSrc = '/Content/' + flight.AvioKompanija + '.png'; // Construct image source path
+
+            var row = '<tr class="items-start text-gray-500 p-2 divide-y divide-slate-400">' +
+                '<td class="p-3">' +
+                `<img width="80" height="80" src="` + imgSrc + '"/>' + flight.AvioKompanija + '</td>' +
+                '<td class="p-3"><i class="fas fa-plane-departure"></i> ' + flight.PolaznaDest + '</td>' +
+                '<td class="p-3"><i class="fas fa-plane-arrival"></i> ' + flight.OdredisnaDest + '</td>' +
+                '<td class="p-3">' + flight.DatVrPolaska + '</td>' +
+                '<td class="p-3">' + flight.DatVrDolaska + '</td>' +
+                '<td class="p-3">' + flight.BrZauzetih + '/' + flight.BrSlobodnih + '</td>' +
+                '<td class="p-3">' + flight.Cena + ' RSD</td>' +
+                '<td class="p-3">' + getStatusString(flight.Status) + '</td>' +
+                '</tr>';
+            tableBody.append(row);
+        });
+    });
+}
+function getCurrentUser() {
+    $.get('/api/login/currentuser')
+        .done(function (userResponse) {
+            console.log("Logged in user:", userResponse);
+            $("#userInfo").show();
+            $("#userUsername").append(userResponse.KorisnickoIme);
+            switch (userResponse.Tip) {
+                case 0:
+                    $("#userRole").text("Role: Putnik");
+                    break
+                case 1:
+                    $("#userRole").text("Role: Admin");
+                    break
+                default:
+                    break;
+
+            }
+
+         
+            $("#prijavaButton").hide()
+            // Dodajte ostala polja po potrebi
+        })
+        .fail(function (xhr, status, error) {
+            console.log("Failed to get current user:", error);
+            $("#message").text("Failed to get current user: " + error);
+        });
+}
 

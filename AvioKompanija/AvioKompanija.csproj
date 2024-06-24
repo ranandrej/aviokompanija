@@ -158,12 +158,15 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LetoviController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AvioKompanija.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Let.cs" />
+    <Compile Include="Models\Recenzija.cs" />
     <Compile Include="Models\Rezervacija.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -178,6 +181,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="Pages\Login.html" />
+    <Content Include="Pages\Profile.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
