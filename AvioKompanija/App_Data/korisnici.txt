@@ -1,0 +1,4 @@
+﻿username,password,andrej,andr,mail@gmail.com,12.07.2003,M,Administrator
+ranandrej,sifra123,andrej,andr,mail@gmail.com,12.07.2003,M,Putnik
+ivanv,ivanv123,Ivan,Ivanovic,mojmail@gmail.com,2024-06-28,Muski,Putnik
+markom,sifra222,Marko,Markovic,stefana@gmail.com,1990-06-12,Muski,Putnik

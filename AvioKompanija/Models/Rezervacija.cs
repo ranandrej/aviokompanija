@@ -14,14 +14,31 @@ namespace AvioKompanija.Models
         public int BrojPutnika { get; set; }
         public int UkupnaCena { get; set; }
         public StatusRez Status { get; set; }
+        public string Id { get;  set; }
 
-        public Rezervacija(Korisnik korisnik,Let let, int brojPutnika, int ukupnaCena, StatusRez status)
+        public Rezervacija()
         {
-            Korisnik = korisnik;
+            // Parameterless constructor for deserialization
+        }
+        public Rezervacija(Let let, int brojPutnika, int ukupnaCena, StatusRez status)
+        {
+            
             Let = let;
             BrojPutnika = brojPutnika;
             UkupnaCena = ukupnaCena;
             Status = status;
+        }
+        public Rezervacija(string id,Let let, int brojPutnika, int ukupnaCena, StatusRez status)
+        {
+            Id = id;
+            Let = let;
+            BrojPutnika = brojPutnika;
+            UkupnaCena = ukupnaCena;
+            Status = status;
+        }
+        public override string ToString()
+        {
+            return $"{Id},{Korisnik},{Let},{BrojPutnika},{UkupnaCena},{(int)Status}";
         }
     }
 }

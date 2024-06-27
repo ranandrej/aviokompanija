@@ -13,9 +13,10 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            loadLetovi();
-            getCurrentUser();
-
+            loadKompanije()
+            loadLetovi()
+            getCurrentUser()
+          
             $('#prijavaButton').click(function () {
 
                 // Pozivamo funkciju za pretragu letova sa startnom i krajnjom destinacijom
@@ -23,6 +24,10 @@
             })
             $('#loginButton').click(function () {
                 window.location.href = 'Pages/Login.html'
+            })
+
+            $('#registerButton').click(function () {
+                window.location.href = 'Pages/Register.html'
             })
            
 
@@ -65,19 +70,7 @@
                 sortFlights("opadajuce");
             })
         });
-        function getStatusString(status) {
-            switch (status) {
-                case 0:
-                    return "Aktivan";
-                case 1:
-                    return "Otkazan";
-                case 2:
-                    return "Zavrsen";
-
-                default:
-                    return "Nepoznat"; // Možete dodati default vrijednost ili neki drugi pristup
-            }
-        }
+       
 
 
     </script>
@@ -85,7 +78,7 @@
 </head>
 <body class="bg-gray-300">
     <div class="w-full flex items-start justify-between py-8 bg-gray-700 h-28">
-       
+
         <div class="mx-3 flex flex-wrap justify-start max-w-[150px]">
             <h1 class="text-white text-xl mx-3">Avio Kompanija <i class="bi bi-airplane"></i></h1>
             <a href="#" class="text-white cursor-pointer font-thin text-lg hover:text-green-500">Home</a>
@@ -93,10 +86,10 @@
                 <button id="prijavaButton" class="mx-5 cursor-pointer bg-green-400 text-white p-2 rounded-md w-[80%]">Prijava <i class="bi bi-person"></i></button>
                 <div id="prijavaOptions" class="bg-white divide-y p-1 mx-5 mt-1 w-1/2 rounded-md" style="display:none;">
                     <button id="loginButton" class="bg-transparent w-full m-0 cursor-pointer text-gray-500 hover:bg-gray-300">Prijava</button>
-                    <button class="bg-transparent w-full m-0 cursor-pointer text-gray-500 hover:bg-gray-300">Registracija</button>
+                    <button id="registerButton" class="bg-transparent w-full m-0 cursor-pointer text-gray-500 hover:bg-gray-300">Registracija</button>
                 </div>
             </div>
-           
+
         </div>
         <div id="userInfo" class="flex justify-center hidden mx-5">
             <a href="Pages/Profile.html" id="userUsername" class="text-white font-thin text-md hover:text-blue-400"><i class="bi bi-person"></i></a>
@@ -150,5 +143,9 @@
         </table>
 
     </div>
+    <h1 class="m-3 text-xl font-thin">Avio Kompanije sa kojima saradjujemo:</h1>
+    <section id="avioKompanije" class="w-full flex items-start justify-center p-8 bg-gray-700">
+        
+    </section>
 </body>
 </html>

@@ -20,6 +20,7 @@ namespace AvioKompanija
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+       
         protected void Application_PostAuthorizeRequest()
         {
             HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);

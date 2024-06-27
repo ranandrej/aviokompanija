@@ -30,5 +30,9 @@ namespace AvioKompanija.Models
             Tip = tip;
             Rezervacije = rezervacije;
         }
+        public override string ToString()
+        {
+            return $"{KorisnickoIme},{Lozinka},{Ime},{Prezime},{Email},{DatumRodjenja},{Pol},{(int)Tip}";
+        }
     }
 }

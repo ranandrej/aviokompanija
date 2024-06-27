@@ -26,8 +26,14 @@
                    .fail(function (xhr, status, error) {
                        if (xhr.status === 401) {
                            console.log("Invalid username or password.");
-                           $("#error").show()
-                       } else {
+                           $("#error").text("Invalid userame or password").show()
+
+                       }
+                         else if(xhr.status === 400) {
+                           console.log("Morate uneti sva polja.");
+                           $("#error").text("Morate uneti sva polja.").show()
+                       }
+                       else {
                          console.log("An error occurred: " + error);
                        }
                    });
