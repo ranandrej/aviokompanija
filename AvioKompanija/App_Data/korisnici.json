@@ -1,0 +1,35 @@
+[
+  {
+    "KorisnickoIme": "username",
+    "Lozinka": "password",
+    "Ime": "andrej",
+    "Prezime": "andr",
+    "Email": "mail@gmail.com",
+    "DatumRodjenja": "07/12/2000",
+    "Pol": "M",
+    "Tip": 1,
+    "Rezervacije": null
+  },
+  {
+    "KorisnickoIme": "ranandrej",
+    "Lozinka": "sifra123",
+    "Ime": "Andrej",
+    "Prezime": "Ranisavljevic",
+    "Email": "ranandrej@gmail.com",
+    "DatumRodjenja": "16/08/2004",
+    "Pol": "N",
+    "Tip": 0,
+    "Rezervacije": null
+  },
+  {
+    "KorisnickoIme": "jovkela",
+    "Lozinka": "mozeneka",
+    "Ime": "Jovan",
+    "Prezime": "Jovelic",
+    "Email": "jovanjov@gmail.com",
+    "DatumRodjenja": "07/05/2007",
+    "Pol": "M",
+    "Tip": 0,
+    "Rezervacije": []
+  }
+]

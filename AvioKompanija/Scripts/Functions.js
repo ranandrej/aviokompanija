@@ -103,10 +103,14 @@ function getCurrentUser() {
             $("#userUsername").append(userResponse.KorisnickoIme);
             switch (userResponse.Tip) {
                 case 0:
+                    
                     $("#userRole").text("Role: Putnik");
+                    $("#userUsername").attr("href", "Pages/Profile.html");
                     break
                 case 1:
+                    
                     $("#userRole").text("Role: Admin");
+                    $("#userUsername").attr("href", "Pages/AdminPage.html");
                     break
                 default:
                     break;
@@ -151,8 +155,8 @@ function ucitajDetaljeAviokompanije(naziv) {
             $('#slika').attr('src', imgSrc);
             $('#naziv').text(data.Naziv)
             $('#opis').text(data.Informacije)
-            $('#adresa').text(data.Adresa)
-
+            $('#adresa').html(`<i class="bi bi-geo-alt-fill text-red-400"></i> `+data.Adresa)
+            return data
 
         })
 }

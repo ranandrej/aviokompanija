@@ -18,40 +18,13 @@ namespace AvioKompanija.Controllers
     {
         
             // Primer hardkodovanih korisnika. U stvarnom scenariju, koristite bazu podataka.
-            private List<Korisnik> users = new List<Korisnik>
+            private static List<Korisnik> users = new List<Korisnik>
         {
-            new Korisnik("username","password","andrej","andr","mail@gmail.com","12.07.2003","M",Tip.Administrator,new List<Rezervacija>()),
-            new Korisnik("ranandrej","sifra123","andrej","andr","mail@gmail.com","12.07.2003","M",Tip.Putnik,new List<Rezervacija>())
+            
         };
         private List<Korisnik> LoadUsersFromFile()
         {
-            string filePath = "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/korisnici.txt";
-            var users = new List<Korisnik>();
-
-            if (File.Exists(filePath))
-            {
-                var lines = File.ReadAllLines(filePath);
-                foreach (var line in lines)
-                {
-                    var data = line.Split(',');
-
-                    var user = new Korisnik
-                    (
-                        data[0],
-                        data[1],
-                        data[2],
-                        data[3],
-                        data[4],
-                        data[5],
-                        data[6],
-                        (Tip)Enum.Parse(typeof(Tip), data[7]), // assuming Tip is an enum
-                        new List<Rezervacija>() // or load reservations if needed
-                    );
-
-                    users.Add(user);
-                }
-            }
-
+            users = Korisnik.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/korisnici.json");
             return users;
         }
 
@@ -84,32 +57,70 @@ namespace AvioKompanija.Controllers
         [Route("register")]
         public IHttpActionResult Register([FromBody] RegisterModel korisnik)
         {
-            if (string.IsNullOrEmpty(korisnik.KorisnickoIme) || string.IsNullOrEmpty(korisnik.Lozinka) || string.IsNullOrEmpty(korisnik.Ime)
-                || string.IsNullOrEmpty(korisnik.Prezime) || string.IsNullOrEmpty(korisnik.Email) || string.IsNullOrEmpty(korisnik.DatumRodjenja)
-                || string.IsNullOrEmpty(korisnik.Pol))
+            if (korisnik != null)
             {
-                return BadRequest("Greska,morate popuniti sva polja!.");
+
+
+                if (string.IsNullOrEmpty(korisnik.KorisnickoIme) || string.IsNullOrEmpty(korisnik.Lozinka) || string.IsNullOrEmpty(korisnik.Ime)
+                    || string.IsNullOrEmpty(korisnik.Prezime) || string.IsNullOrEmpty(korisnik.Email) || string.IsNullOrEmpty(korisnik.DatumRodjenja)
+                    || string.IsNullOrEmpty(korisnik.Pol))
+                {
+                    return BadRequest("Greska,morate popuniti sva polja!.");
+                }
+
+                Korisnik user = new Korisnik(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Email, korisnik.DatumRodjenja
+                    , korisnik.Pol, Tip.Putnik, new List<Rezervacija>());
+
+                LoadUsersFromFile();
+                if (users.Any(u => u.KorisnickoIme == user.KorisnickoIme))
+                {
+                    return BadRequest("Username vec postoji.");
+                }
+                else
+                {
+                    HttpContext.Current.Session["LoggedUser"] = user;
+                    users.Add(user);
+                    Korisnik.SaveListToFile(users, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/korisnici.json");
+
+                }
+
+                // Postavljanje korisnika u sesiju
+
+                return Ok("Login successful");
+            }
+            return BadRequest("Morate popuniti sva polja");
+        }
+        [HttpPut]
+        [Route("updateUser")]
+        public IHttpActionResult Update([FromBody] Korisnik korisnik)
+        {
+            if (korisnik == null || string.IsNullOrEmpty(korisnik.KorisnickoIme) || string.IsNullOrEmpty(korisnik.Lozinka) || string.IsNullOrEmpty(korisnik.Ime)
+        || string.IsNullOrEmpty(korisnik.Prezime) || string.IsNullOrEmpty(korisnik.Email) || string.IsNullOrEmpty(korisnik.DatumRodjenja)
+        || string.IsNullOrEmpty(korisnik.Pol))
+            {
+                return BadRequest("Greska, morate popuniti sva polja!");
             }
 
-            Korisnik user = new Korisnik(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Email, korisnik.DatumRodjenja
-                , korisnik.Pol,Tip.Putnik, new List<Rezervacija>());
+            // Load the existing users from the file
+            var users = Korisnik.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/korisnici.json");
 
-            var users = LoadUsersFromFile();
-            if (users.Any(u => u.KorisnickoIme == user.KorisnickoIme))
+            // Find the index of the user to be updated
+            var userIndex = users.FindIndex(u => u.KorisnickoIme == korisnik.KorisnickoIme);
+
+            if (userIndex == -1)
             {
-                return BadRequest("Username vec postoji.");
+                return BadRequest("Dati korisnik ne postoji.");
             }
             else
             {
-                HttpContext.Current.Session["LoggedUser"] = user;
-                var userLine = user.ToString();
-                File.AppendAllText("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/korisnici.txt", userLine + '\n');
-
+                // Update the user
+                users[userIndex] = korisnik;
+                HttpContext.Current.Session["LoggedUser"] = korisnik;
+                // Save the updated user list back to the file
+                Korisnik.SaveListToFile(users, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/korisnici.json");
             }
 
-            // Postavljanje korisnika u sesiju
-
-            return Ok("Login successful");
+            return Ok("Update successful");
         }
         [HttpGet]
         [Route("currentuser")]

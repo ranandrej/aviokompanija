@@ -13,61 +13,37 @@ namespace AvioKompanija.Controllers
     {
         private static List<Let> letovi = new List<Let>
         {
-          
+
         };
         private static List<Rezervacija> rezervacije = new List<Rezervacija>
         {
 
         };
+        private static List<Recenzija> recenzije = new List<Recenzija>
+        {
+
+        };
+
         private static List<AvioKompanija.Models.AvioKompanija> kompanije = new List<AvioKompanija.Models.AvioKompanija>
         {
 
         };
-        
-        
+
+
         public IEnumerable<Let> Get()
         {
-            string filePath = "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.txt";
-            List<Let> letoviLocal = new List<Let>();
-            var lines = File.ReadAllLines(filePath);
+            letovi = Let.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.json");
 
-            foreach (var line in lines)
-            {
-                // Pretpostavimo da su podaci odvojeni zarezima
-                var data = line.Split(',');
-
-                // Kreiranje objekta Let i dodavanje u listu
-                var let = new Let
-                (
-                    data[0],
-                   data[1],
-                   data[2],
-                   data[3],
-                   data[4],
-                   data[5],
-                   Int32.Parse(data[6]),
-                   Int32.Parse(data[7]),
-                   Int32.Parse(data[8]),
-                   (Status)Int32.Parse(data[9])
-                    // Dodajte ostale osobine po potrebi
-                );
-                
-                    letoviLocal.Add(let);
-
-                
-                letovi = letoviLocal;
-            }
-
-           return letovi;
+            return letovi;
         }
 
-        
-        public IEnumerable<Let> Get(string startDest,string endDest,string startDateStr,string endDateStr,string avioKompanija)
+
+        public IEnumerable<Let> Get(string startDest, string endDest, string startDateStr, string endDateStr, string avioKompanija)
         {
-            IEnumerable<Let> filteredFlights=letovi;
+            IEnumerable<Let> filteredFlights = letovi;
             if (!string.IsNullOrEmpty(startDest) && !string.IsNullOrEmpty(endDest))
             {
-                
+
                 if (!string.IsNullOrEmpty(startDateStr) && !string.IsNullOrEmpty(endDateStr))
                 {
                     if (!string.IsNullOrEmpty(avioKompanija))
@@ -80,13 +56,13 @@ namespace AvioKompanija.Controllers
                     }
                     else
                     {
-                           filteredFlights = letovi.Where(l => l.DatVrPolaska.Split()[0].Equals(startDateStr, StringComparison.OrdinalIgnoreCase)
-                           && l.DatVrDolaska.Split()[0].Equals(endDateStr, StringComparison.OrdinalIgnoreCase)
-                           && l.PolaznaDest.Equals(startDest, StringComparison.OrdinalIgnoreCase) &&
-                           l.OdredisnaDest.Equals(endDest, StringComparison.OrdinalIgnoreCase));
+                        filteredFlights = letovi.Where(l => l.DatVrPolaska.Split()[0].Equals(startDateStr, StringComparison.OrdinalIgnoreCase)
+                        && l.DatVrDolaska.Split()[0].Equals(endDateStr, StringComparison.OrdinalIgnoreCase)
+                        && l.PolaznaDest.Equals(startDest, StringComparison.OrdinalIgnoreCase) &&
+                        l.OdredisnaDest.Equals(endDest, StringComparison.OrdinalIgnoreCase));
                     }
 
-                   
+
                 }
                 else
                 {
@@ -110,28 +86,28 @@ namespace AvioKompanija.Controllers
                         && l.DatVrDolaska.Split()[0].Equals(endDateStr, StringComparison.OrdinalIgnoreCase));
                     }
 
-                    
-                    
+
+
                 }
                 else
                 {
                     if (!string.IsNullOrEmpty(avioKompanija))
                     {
-                        filteredFlights = letovi.Where(l =>l.AvioKompanija.Equals(avioKompanija,StringComparison.OrdinalIgnoreCase));
+                        filteredFlights = letovi.Where(l => l.AvioKompanija.Equals(avioKompanija, StringComparison.OrdinalIgnoreCase));
                     }
                 }
             }
 
-          
 
-           
-            
+
+
+
             return filteredFlights;
 
         }
         [HttpGet]
         [Route("api/letovi/sort")]
-        public IEnumerable<Let>SortLetovi(string smer)
+        public IEnumerable<Let> SortLetovi(string smer)
         {
             if (smer.Equals("opadajuce", System.StringComparison.OrdinalIgnoreCase))
             {
@@ -148,33 +124,167 @@ namespace AvioKompanija.Controllers
         [Route("api/letovi/aviokompanije")]
         public IEnumerable<AvioKompanija.Models.AvioKompanija> GetAvioKompanije()
         {
-            string filePath = "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.txt";
-            List<AvioKompanija.Models.AvioKompanija> avioKompanije = new List<AvioKompanija.Models.AvioKompanija>();
-            var lines = File.ReadAllLines(filePath);
 
-            foreach (var line in lines)
+            kompanije = Models.AvioKompanija.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+
+            // Iteriranje kroz listu aviokompanija i čišćenje postojećih letova
+            foreach (var kompanija in kompanije)
             {
-                // Pretpostavimo da su podaci odvojeni zarezima
-                var data = line.Split(':');
-
-                // Kreiranje objekta Let i dodavanje u listu
-                var avioKompanija = new AvioKompanija.Models.AvioKompanija
-                (
-                   data[0],
-                   data[1],
-                   data[2],
-                   new List<Let>(),
-                   new List<Recenzija>()
-                  
-                // Dodajte ostale osobine po potrebi
-                );
-
-                avioKompanije.Add(avioKompanija);
-                kompanije = avioKompanije;
-               
+                kompanija.Letovi = new List<Let>();
             }
-            return avioKompanije;
+
+            // Iteriranje kroz listu letova
+            foreach (var let in letovi)
+            {
+                // Pronaći index aviokompanije koja odgovara letovom Aviokompanija polju
+                var kompIndex = kompanije.FindIndex(k => k.Naziv == let.AvioKompanija);
+
+                if (kompIndex != -1)
+                {
+                    // Ako aviokompanija postoji, dodajte let u njenu listu letova
+                    kompanije[kompIndex].Letovi.Add(let);
+                }
+            }
+
+            return kompanije;
         }
+        [HttpPost]
+        [Route("api/letovi/addKompanija")]
+        public IHttpActionResult AddKompanija([FromBody] Models.AvioKompanija kompanija)
+        {
+            if (kompanija == null || kompanija.Naziv=="" || kompanija.Adresa=="" || kompanija.Informacije=="")
+            {
+                return BadRequest("Greska morate popuniti sva polja!");
+            }
+            else
+            {
+                kompanije.Add(kompanija);
+                Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+                return Ok("Uspesno dodata kompanija");
+            }
+        }
+        [HttpPost]
+        [Route("api/letovi/addLet")]
+        public IHttpActionResult AddLet([FromBody] Let let)
+        {
+            if (let == null || string.IsNullOrWhiteSpace(let.PolaznaDest) || string.IsNullOrWhiteSpace(let.OdredisnaDest) || string.IsNullOrWhiteSpace(let.AvioKompanija))
+            {
+                return BadRequest("Greška: morate popuniti sva polja!");
+            }
+
+            try
+            {
+                let.Id = letovi.Any() ? (Convert.ToInt32(letovi.Last().Id) + 1).ToString() : "1";
+
+                bool kompanijaPronadjena = false;
+                foreach (var kompanija in kompanije)
+                {
+                    if (kompanija.Naziv == let.AvioKompanija)
+                    {
+                        kompanija.Letovi.Add(let);
+                        kompanijaPronadjena = true;
+                        break;
+                    }
+                }
+
+                if (!kompanijaPronadjena)
+                {
+                    return BadRequest("Ne postoji data aviokompanija!");
+                }
+
+                letovi.Add(let);
+                Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/kompanije.json");
+                Let.SaveListToFile(letovi, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.json");
+
+                return Ok("Uspešno dodat let");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        [HttpPost]
+        [Route("api/letovi/removeLet")]
+        public IHttpActionResult RemoveLet([FromBody] Let let)
+        {
+            rezervacije = Rezervacija.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.json");
+            if (let == null)
+            {
+                return BadRequest("Greška: pogrešno popunjena polja!");
+            }
+
+            var existingLet = letovi.FirstOrDefault(l => l.Id == let.Id);
+            if (existingLet == null)
+            {
+                return BadRequest("Let ne postoji!");
+            }
+
+            // Provera da li postoji rezervacija sa statusom 'odobrena' ili 'kreirana' koja sadrži ovaj let
+            var rezervacijaPostoji = rezervacije.Any(r => r.Let.Id == let.Id && (r.Status == StatusRez.Kreirana || r.Status == StatusRez.Odobrena));
+            if (rezervacijaPostoji)
+            {
+                return BadRequest("Let ne može biti obrisan jer postoji rezervacija sa statusom 'odobrena' ili 'kreirana' koja ga sadrži.");
+            }
+
+            // Uklanjanje leta iz liste letova
+            letovi.Remove(existingLet);
+
+            // Uklanjanje leta iz liste letova svake aviokompanije
+            foreach (var komp in kompanije)
+            {
+                var letToRemove = komp.Letovi.FirstOrDefault(l => l.Id == let.Id);
+                if (letToRemove != null)
+                {
+                    komp.Letovi.Remove(letToRemove);
+                }
+            }
+
+            // Čuvanje ažuriranih lista u fajl
+            Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+            Let.SaveListToFile(letovi, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.json");
+
+            return Ok("Uspešno obrisan let");
+        }
+        [HttpPost]
+        [Route("api/letovi/changeKompanija")]
+        public IHttpActionResult ChangeKompanija([FromBody] Models.AvioKompanija kompanija)
+        {
+            if (kompanija == null || kompanija.Adresa=="" || kompanija.Informacije=="")
+            {
+                return BadRequest("Greska morate popuniti sva polja!");
+            }
+            else
+            {
+                int indx = kompanije.FindIndex(k => k.Naziv == kompanija.Naziv);
+                if (indx == -1)
+                {
+                    return BadRequest("Ne postoji data kompanija!");
+                }
+                kompanije[indx] = kompanija;
+                Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+                return Ok("Uspesno izmenjena kompanija");
+            }
+        }
+        [HttpPost]
+        [Route("api/letovi/removeKompanija")]
+        public IHttpActionResult RemoveKompanija([FromBody] Models.AvioKompanija kompanija)
+        {
+            if (kompanija == null)
+            {
+                return BadRequest("Greska pogresni poopunjena polja!");
+            }
+            else
+
+            
+            {
+                var existingKompanija = kompanije.FirstOrDefault(k => k.Naziv == kompanija.Naziv);
+
+                kompanije.Remove(existingKompanija);
+                Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+                return Ok("Uspesno obrisana kompanija");
+            }
+        }
+
         [HttpGet]
         [Route("api/letovi/aviokompanija")]
         public AvioKompanija.Models.AvioKompanija GetKompanija(string naziv)
@@ -229,20 +339,11 @@ namespace AvioKompanija.Controllers
               }
             let.BrSlobodnih -= rezervacija.BrojPutnika;
             let.BrZauzetih += rezervacija.BrojPutnika;
+            Let.SaveListToFile(letovi, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.json");
             rezervacija.Let.BrSlobodnih -= rezervacija.BrojPutnika;
             rezervacija.Let.BrZauzetih += rezervacija.BrojPutnika;
             rezervacije.Add(rezervacija);
-            var rezLine = rezervacija.ToString();
-            File.AppendAllText("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.txt", rezLine + '\n');
-            var lines = new List<string>();
-
-            foreach (var flight in letovi)
-            {
-                lines.Add(flight.ToString());
-            }
-
-            File.WriteAllText("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.txt", string.Empty);  // Očistite fajl pre nego što upišete nove linije
-            File.AppendAllLines("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.txt", lines);
+            Rezervacija.SaveListToFile(rezervacije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.json");
             return Ok("Uspesno kreirana rezervacija");
 
 
@@ -280,25 +381,9 @@ namespace AvioKompanija.Controllers
             rezervacije.Remove(existingRezervacija);
 
             // Append reservation details to rezervacije.txt
-            var lines = new List<string>();
+            Rezervacija.SaveListToFile(rezervacije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.json");
+            Let.SaveListToFile(letovi, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.json");
 
-            foreach (var rez in rezervacije)
-            {
-                lines.Add(rez.ToString());
-            }
-
-            File.WriteAllText("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.txt", string.Empty);  // Očistite fajl pre nego što upišete nove linije
-            File.AppendAllLines("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.txt", lines);
-
-            var lines2 = new List<string>();
-
-            foreach (var flight in letovi)
-            {
-                lines.Add(flight.ToString());
-            }
-
-            File.WriteAllText("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.txt", string.Empty);  // Očistite fajl pre nego što upišete nove linije
-            File.AppendAllLines("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/letovi.txt", lines2);
             return Ok("Successfully cancelled reservation.");
 
 
@@ -307,7 +392,7 @@ namespace AvioKompanija.Controllers
         [Route("api/letovi/rezervacije")]
         public IHttpActionResult GetRezByKorisnickoIme(string korisnickoIme)
         {
-            LoadRezervacije();
+            rezervacije = Rezervacija.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.json");
             List<Rezervacija> rezKorisnika = new List<Rezervacija>();
 
             // Pronađi sve letove koji pripadaju datom korisničkom imenu
@@ -331,30 +416,7 @@ namespace AvioKompanija.Controllers
                 return NotFound(); // Ako nema pronađenih letova za dato korisničko ime, vraćamo Not Found
             }
         }
-        public List<Rezervacija> LoadRezervacije()
-        {
-            List<Rezervacija> rezUcitane = new List<Rezervacija>();
-            string[] linije = File.ReadAllLines("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/rezervacije.txt");
-            foreach (var linija in linije)
-            {
-                string[] delovi = linija.Split(',');
-                if (delovi.Length >= 22) // Ensure there are enough parts to parse
-                {
-                    // Assuming the format and indices are correct based on your file structure
-                    Korisnik k = new Korisnik(delovi[1], delovi[2], delovi[3], delovi[4], delovi[5], delovi[6], delovi[7], (Tip)Convert.ToInt32(delovi[8]), new List<Rezervacija>());
-                    Let let = new Let(delovi[9], delovi[10], delovi[11], delovi[12], delovi[13], delovi[14], Convert.ToInt32(delovi[15]), Convert.ToInt32(delovi[16]), Convert.ToInt32(delovi[17]), (Status)Convert.ToInt32(delovi[18]));
-                    Rezervacija rezervacija = new Rezervacija(delovi[0], let, Convert.ToInt32(delovi[19]), Convert.ToInt32(delovi[20]), (StatusRez)Convert.ToInt32(delovi[21]));
-                    rezervacija.Korisnik = k;
-                    // Add the key-value pair to the dictionary
-                    rezUcitane.Add(rezervacija);
-                    rezervacije = rezUcitane;
-                }
-                
-            }
-            
-
-            return rezervacije;
-        }
+        
         [HttpGet]
         [Route("api/letovi/getAll")]
         public IEnumerable<Let> GetLetovi()
@@ -370,8 +432,75 @@ namespace AvioKompanija.Controllers
 
             return rezervacije;
         }
+        [HttpPost]
+        [Route("api/letovi/postRecenzija")]
+        public IHttpActionResult Recenzija([FromBody] Recenzija recenzija)
+        {
+           if(recenzija.Naslov!="" && recenzija.Sadrzaj != "")
+            {
+                Models.AvioKompanija kompanija = kompanije.Find(k => k.Naziv == recenzija.AvioKompanija.Naziv);
+                if (kompanija.Recenzije.Count() == 0)
+                {
+                    recenzija.Id = "1";
+                }
+                else
+                {
+                    recenzija.Id = (Convert.ToInt32(kompanija.Recenzije.Last().Id) + 1).ToString();
+                }
+                kompanija.Recenzije.Add(recenzija);
 
+                Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+
+                return Ok("Uspesno dodata recenzija i poslata adminu na proveru!");
+               
+            }
+            return BadRequest("Sva polja moraju biti popunjena!");
+        }
+        [HttpPut]
+        [Route("api/letovi/updateRecenzija")]
+        public IHttpActionResult UpdateRecenzija([FromBody] Recenzija recenzija)
+        {
+            if (recenzija.Naslov != "" && recenzija.Sadrzaj != "")
+            {
+                Models.AvioKompanija kompanija = kompanije.Find(k => k.Naziv == recenzija.AvioKompanija.Naziv);
+
+                int indx = kompanija.Recenzije.FindIndex(r => r.Id == recenzija.Id);
+                if(indx == -1)
+                {
+                    return BadRequest("Greska nemoguce promeniti datu recenziju");
+                }
+                kompanija.Recenzije[indx]=recenzija;
+
+                Models.AvioKompanija.SaveListToFile(kompanije, "C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+
+                return Ok("Uspesno promenjena recenzija");
+
+            }
+            return BadRequest("Sva polja moraju biti popunjena!");
+        }
+        [HttpGet]
+        [Route("api/letovi/recenzije")]
+        public List<Recenzija> GetRecenzije(string nazivKompanije)
+        {
+            kompanije = Models.AvioKompanija.LoadListFromFile("C:/Users/Korisnik/source/repos/AvioKompanija/AvioKompanija/App_Data/aviokompanije.json");
+            if (nazivKompanije != "")
+            {
+                var kompanija = kompanije.Find(k => k.Naziv == nazivKompanije);
+                
+                
+                    return kompanija.Recenzije;
+
+                
+            }
+            else
+            {
+                return new List<Recenzija>();
+            }
+            
+        }
+       
     }
+
   
 
 

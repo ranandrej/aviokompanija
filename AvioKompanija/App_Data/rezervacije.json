@@ -1,0 +1,118 @@
+[
+  {
+    "Korisnik": {
+      "KorisnickoIme": "motomax",
+      "Lozinka": "sifra123",
+      "Ime": "Andrej",
+      "Prezime": "Ranisavljevic",
+      "Email": "office@motomax.rs",
+      "DatumRodjenja": "1997-05-21",
+      "Pol": "Muski",
+      "Tip": 0,
+      "Rezervacije": []
+    },
+    "Let": {
+      "Id": "221",
+      "AvioKompanija": "WizzAir",
+      "PolaznaDest": "Beograd",
+      "OdredisnaDest": "Istanbul",
+      "DatVrPolaska": "22/07/2024 10:00",
+      "DatVrDolaska": "22/07/2024 13:00",
+      "BrSlobodnih": 14,
+      "BrZauzetih": 12,
+      "Cena": 11300,
+      "Status": 0
+    },
+    "BrojPutnika": 2,
+    "UkupnaCena": 22600,
+    "Status": 0,
+    "Id": "3"
+  },
+  {
+    "Korisnik": {
+      "KorisnickoIme": "ranandrej",
+      "Lozinka": "sifra123",
+      "Ime": "andrej",
+      "Prezime": "andr",
+      "Email": "mail@gmail.com",
+      "DatumRodjenja": "12.07.2003",
+      "Pol": "M",
+      "Tip": 0,
+      "Rezervacije": []
+    },
+    "Let": {
+      "Id": "453",
+      "AvioKompanija": "WizzAir",
+      "PolaznaDest": "Oslo",
+      "OdredisnaDest": "Minhen",
+      "DatVrPolaska": "29/06/2024 11:10",
+      "DatVrDolaska": "29/06/2024 12:00",
+      "BrSlobodnih": 7,
+      "BrZauzetih": 13,
+      "Cena": 32000,
+      "Status": 0
+    },
+    "BrojPutnika": 3,
+    "UkupnaCena": 96000,
+    "Status": 0,
+    "Id": "6"
+  },
+  {
+    "Korisnik": {
+      "KorisnickoIme": "motomax",
+      "Lozinka": "sifra123",
+      "Ime": "Andrej",
+      "Prezime": "Ranisavljevic",
+      "Email": "office@motomax.rs",
+      "DatumRodjenja": "1997-05-21",
+      "Pol": "Muski",
+      "Tip": 0,
+      "Rezervacije": []
+    },
+    "Let": {
+      "Id": "453",
+      "AvioKompanija": "WizzAir",
+      "PolaznaDest": "Oslo",
+      "OdredisnaDest": "Minhen",
+      "DatVrPolaska": "29/06/2024 11:10",
+      "DatVrDolaska": "29/06/2024 12:00",
+      "BrSlobodnih": 8,
+      "BrZauzetih": 12,
+      "Cena": 32000,
+      "Status": 0
+    },
+    "BrojPutnika": 2,
+    "UkupnaCena": 64000,
+    "Status": 0,
+    "Id": "8"
+  },
+  {
+    "Korisnik": {
+      "KorisnickoIme": "jovkela",
+      "Lozinka": "mozeneka",
+      "Ime": "Jovan",
+      "Prezime": "Jovelic",
+      "Email": "jovanjov@gmail.com",
+      "DatumRodjenja": "07/05/2007",
+      "Pol": "M",
+      "Tip": 0,
+      "Rezervacije": []
+    },
+    "Let": {
+      "Id": "1",
+      "AvioKompanija": "RyanAir",
+      "PolaznaDest": "London",
+      "OdredisnaDest": "Zagreb",
+      "DatVrPolaska": "29/08/2024 11:00",
+      "DatVrDolaska": "29/08/2024 11:35",
+      "BrSlobodnih": 27,
+      "BrZauzetih": 3,
+      "Cena": 5000,
+      "Status": 0
+    },
+    "BrojPutnika": 3,
+    "UkupnaCena": 15000,
+    "Status": 0,
+    "Id": "9"
+  }
+]

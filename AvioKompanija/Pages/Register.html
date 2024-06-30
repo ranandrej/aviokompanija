@@ -13,18 +13,30 @@
        $(document).ready(function () {
 
            $('#registerButton').click(function () {
+               var dateValue = $("#datumRodjenja").val()
+               if (dateValue) {
+                   // Kreiranje novog Date objekta
+                   let dateObj = new Date(dateValue);
 
-               console.log("Clicked!")
-               var noviKorisnik = {
-                   KorisnickoIme: $("#username").val(),
-                   Lozinka: $("#password").val(),
-                   Ime: $("#ime").val(),
-                   Prezime: $("#prezime").val(),
-                   Email: $("#email").val(),
-                   DatumRodjenja: $("#datumRodjenja").val(),
-                   Pol: $("#pol").val(),
-                   
-               };
+                   // Ekstrakcija dana, meseca i godine
+                   let day = String(dateObj.getDate()).padStart(2, '0');
+                   let month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Mesecevi su nula-bazirani
+                   let year = dateObj.getFullYear();
+
+                   // Formiranje datuma u formatu DD/MM/YYYY
+                   let formattedDate = `${day}/${month}/${year}`;
+                   console.log("Clicked!")
+                   var noviKorisnik = {
+                       KorisnickoIme: $("#username").val(),
+                       Lozinka: $("#password").val(),
+                       Ime: $("#ime").val(),
+                       Prezime: $("#prezime").val(),
+                       Email: $("#email").val(),
+                       DatumRodjenja: formattedDate,
+                       Pol: $("#pol").val(),
+
+                   };
+               }
                $.post('/api/login/register', noviKorisnik)
                    .done(function (response) {
                        console.log(response)
@@ -81,9 +93,9 @@
 
             <label for="pol" class="w-full text-white">Pol:</label>
             <select type="text" class="rounded-md p-2 w-full bg-gray-300" id="pol" name="pol" >
-                <option value="Muski">Muski</option>
-                <option value="Zenski">Zenski</option>
-                <option value="Neopredeljen">Neopredeljen</option>
+                <option value="M">Muski</option>
+                <option value="Z">Zenski</option>
+                <option value="N">Neopredeljen</option>
 
             </select>
             <button id="registerButton" class="p-2 rounded-md border-green-400 border-2 bg-transparent hover:bg-green-500 text-white cursor-pointer w-1/2 my-4">Registracija</button>

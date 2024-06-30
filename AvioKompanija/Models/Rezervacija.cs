@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace AvioKompanija.Models
 {
@@ -39,6 +41,28 @@ namespace AvioKompanija.Models
         public override string ToString()
         {
             return $"{Id},{Korisnik},{Let},{BrojPutnika},{UkupnaCena},{(int)Status}";
+        }
+        public void SaveToFile(string filePath)
+        {
+            var json = JsonConvert.SerializeObject(this, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+
+        public static Rezervacija LoadFromFile(string filePath)
+        {
+            var json = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<Rezervacija>(json);
+        }
+        public static void SaveListToFile(List<Rezervacija> rezervacije, string filePath)
+        {
+            var json = JsonConvert.SerializeObject(rezervacije, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+
+        public static List<Rezervacija> LoadListFromFile(string filePath)
+        {
+            var json = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<List<Rezervacija>>(json);
         }
     }
 }

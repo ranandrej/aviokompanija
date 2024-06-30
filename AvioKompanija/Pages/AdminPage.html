@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="/Scripts/jquery-3.4.1.js"></script>
+    <script src="/Scripts/Functions.js"></script>
+    <script src="/Scripts/Functions2.js"></script>
+    <script src="/Scripts/Functions3.js"></script>
+
+    <script type="text/javascript">
+        var currentFlight = null
+        var currentUsername=""
+        var currentUser = {}
+        $(document).ready(function () {
+         
+            loadUser();
+            loadFlights()
+            loadUsers()
+            loadKompanijeTable()
+
+
+            $("#pretrazi").click(function () {
+                var ime = $("#name").val()
+                var prezime = $("#surename").val()
+                if (ime == "" && prezime == "") {
+                    loadUsers()
+                } else {
+                    serachUsers(ime, prezime)
+                }
+                
+            })
+
+
+
+          
+            $("#changeUser").click(function () {
+                let dateValue = $('#datumRodjChange').val();
+
+                if (dateValue) {
+                    // Kreiranje novog Date objekta
+                    let dateObj = new Date(dateValue);
+
+                    // Ekstrakcija dana, meseca i godine
+                    let day = String(dateObj.getDate()).padStart(2, '0');
+                    let month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Mesecevi su nula-bazirani
+                    let year = dateObj.getFullYear();
+
+                    // Formiranje datuma u formatu DD/MM/YYYY
+                    let formattedDate = `${day}/${month}/${year}`;
+
+                    var user = {
+                        KorisnickoIme: currentUser.KorisnickoIme,
+                        Lozinka: $('#lozinkaChange').val(),
+                        Ime: $('#imeChange').val(),
+                        Prezime: $('#prezimeChange').val(),
+                        Email: $('#emailChange').val(),
+                        DatumRodjenja: formattedDate,
+                        Pol: $('#polChange').val(),
+                        Tip: currentUser.Tip
+                    };
+                }
+                console.log(JSON.stringify(user))
+                changeUser(user)
+            })
+            $("#cancleChange").click(function () {
+                $("#updateUser").hide()
+            })
+            $("#cancleDelete").click(function () {
+                $("#deleteModal").hide()
+                $("#modal-overlay").hide()
+            })
+            $("#imeRastuce").click(function () {
+                sortUsers("rastuce")
+            })
+            $("#imeOpadajuce").click(function () {
+                sortUsers("opadajuce")
+            })
+            $("#datRastuce").click(function () {
+                sortUsersByDatRodj("rastuce")
+            })
+            $("#datOpadajuce").click(function () {
+                sortUsersByDatRodj("opadajuce")
+            })
+            $("#addKompanija").click(function () {
+                $("#addKompanijaModal").show()
+                $("#dodajKompaniju").show()
+                $("#izmeniKompaniju").show()
+            })
+            $("#dodajKompaniju").click(function () {
+                var kompanija = {
+                    Naziv: $("#nazivKompanije").val(),
+                    Adresa: $("#adresaKompanije").val(),
+                    Informacije: $("#infoKompanije").val(),
+                    Letovi: [],
+                    Recenzije: []
+                }
+                dodajAvioKompaniju(kompanija)
+            })
+            $("#pretraziKompanije").click(function () {
+                var companyName=$("#kompanijaName").val()
+                var companyAddress = $("#kompanijaAddress").val()
+                pretraziKompanije(companyName, companyAddress)
+            })
+            
+            $("#cancleAddKompaniju").click(function () {
+                $("#addKompanijaModal").hide()
+                $('#nazivKompanije').prop('readonly', false);
+            })
+            $("#cancleAddLet").click(function () {
+                $("#addLetModal").hide()
+                
+            })
+            $("#addLet").click(function () {
+                $("#addLetModal").show()
+
+            })
+            $("#dodajLet").click(function () {
+                var let = {
+                    Id:"",
+                    PolaznaDest:$("#polaznaDest").val(),
+                    OdredisnaDest:$("#odredisnaDest").val(),
+                    DatVrPolaska:$("#datVrPolaska").val(),
+                    DatVrDolaska:$("#datVrDolaska").val(),
+                    AvioKompanija:$("#avioKompanijaLeta").val(),
+                    Cena: $("#cenaLeta").val(),
+                    BrSlobodnih:30,
+                    BrZauzetih:0,
+                    Status:0
+                }
+                dodajLet(let)
+
+            })
+            $("#showEditModal").click(function () {
+                $("#emailChange").val(currentUser.Email)
+                $("#imeChange").val(currentUser.Ime)
+                $("#prezimeChange").val(currentUser.Prezime)
+                $("#lozinkaChange").val(currentUser.Lozinka)
+                $("#datumRodjChange").val(currentUser.DatumRodjenja)
+                $("#polChange").val(currentUser.Pol)
+                $("#updateUser").show()
+            })
+
+            $('#logoutButton').click(function () {
+                $.ajax({
+                    url: '/api/login/logout',
+                    type: 'POST',
+                    success: function (response) {
+                        console.log(response);
+
+                        window.location.href = "/index.html";
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Došlo je do greške: " + xhr.responseText);
+                        // Prikaz poruke o grešci
+                    }
+                });
+            });
+
+        })
+    </script>
+</head>
+<body class="bg-gray-300">
+    <div class="w-full flex items-start justify-start py-8 bg-gray-700 h-28">
+
+        <div class="mx-3 flex flex-wrap justify-start max-w-[150px]">
+            <h1 class="text-white text-xl mx-3">Avio Kompanija <i class="bi bi-airplane"></i></h1>
+            <a href="/index.html" class="text-white cursor-pointer font-thin text-lg hover:text-green-500">Home</a>
+            <button id="logoutButton" class="bg-red-400 rounded-md cursor-pointer ml-5 text-white p-2 hidden"><i class="bi bi-box-arrow-left"></i> LogOut</button>
+        </div>
+    </div>
+    <h1 class="m-5 text-xl">Informacije o korisniku:</h1>
+    <div class="flex flex-wrap m-3 bg-gray-700 justify-start w-[350px] rounded-md p-10">
+        <p id="username" class="text-lg text-white font-thin w-full"> </p>
+        <p id="email" class="text-lg text-white font-thin w-full"> </p>
+        <p id="ime" class="text-lg text-white font-thin w-full"> </p>
+        <p id="datRodj" class="text-lg text-white font-thin w-full"> </p>
+        <p id="pol" class="text-lg text-white font-thin w-full"> </p>
+        <p id="tip" class="text-lg text-white font-thin w-full"></p>
+        <button id="showEditModal" class="bg-transparent border-2 p-2 rounded-md border-green-400 hover:bg-green-400 cursor-pointer">Izmeni</button>
+    </div>
+    <p class="m-2 text-lg">Pretraga korisnika:</p>
+    <div class="w-1/3 flex flex-wrap justify-start p-6">
+
+        <div class="flex flex-wrap">
+            <label>Ime:</label>
+            <input id="name" type="text" class="w-full p-2 rounded-md bg-gray-200 m-1" />
+
+
+        </div>
+        <div class="flex flex-wrap">
+            <label>Prezime:</label>
+            <input id="surename" type="text" class="w-full p-2 rounded-md bg-gray-200 m-1" />
+        </div>
+        <button id="pretrazi" class="w-2/3 p-1 mt-2 rounded-md bg-blue-400 text-white cursor-pointer">Pretrazi</button>
+    </div>
+
+    <div class="flex flex-wrap m-4 w-1/2 p-3">
+        <h5 class="w-full font-thin mb-1">Sortiraj po:</h5>
+        <button id="imeRastuce" class="bg-gray-200 rounded-md cursor-pointer m-3 p-2 font-thin text-gray-500"><i class="bi bi-arrow-up"></i> Imenu rastuce</button>
+        <button id="imeOpadajuce" class="bg-gray-200 rounded-md cursor-pointer m-3 p-2 font-thin text-gray-500"><i class="bi bi-arrow-down"></i> Imenu opadajuce</button>
+
+    </div>
+    <div class="flex flex-wrap mx-4 mt-0 w-1/2 p-3">
+
+        <button id="datRastuce" class="bg-gray-200 rounded-md cursor-pointer mx-3 mt-0 p-2 font-thin text-gray-500"><i class="bi bi-arrow-up"></i> Datum rodjenja rastuce</button>
+        <button id="datOpadajuce" class="bg-gray-200 rounded-md cursor-pointer mx-3 mt-0 p-2 font-thin text-gray-500"><i class="bi bi-arrow-down"></i> Datum rodjenja opadajuce</button>
+
+    </div>
+    <h5 class="mx-4 font-thin mb-1">Korisnici:</h5>
+    <table id="korisnici" class="border-1 border-transparent m-6 rounded-md bg-gray-100">
+    </table>
+    <p class="m-2 text-lg">Pretraga Avio Kompanija:</p>
+    <div class="w-1/3 flex flex-wrap justify-start p-6">
+
+        <div class="flex flex-wrap">
+            <label>Naziv:</label>
+            <input id="kompanijaName" type="text" class="w-full p-2 rounded-md bg-gray-200 m-1" />
+
+
+        </div>
+        <div class="flex flex-wrap">
+            <label>Adresa:</label>
+            <input id="kompanijaAddress" type="text" class="w-full p-2 rounded-md bg-gray-200 m-1" />
+        </div>
+        <button id="pretraziKompanije" class="w-2/3 p-1 mt-2 rounded-md bg-blue-400 text-white cursor-pointer">Pretrazi</button>
+    </div>
+    <h5 class=" mx-4 font-thin mb-1">Aviokompanije:</h5>
+    <button id="addKompanija" class="mx-5 cursor-pointer bg-green-400 text-white p-2 rounded-md">Dodaj novu</button>
+    <table id="kompanije" class="border-1 border-transparent m-6 rounded-md bg-gray-100">
+    </table>
+    <h5 class=" mx-4 font-thin mb-1">Letovi:</h5>
+    <button id="addLet" class="mx-5 cursor-pointer bg-green-400 text-white p-2 rounded-md">Dodaj novi</button>
+
+    <label class="text-red-400 text-md m-3" id="errorDeleteLet"></label>
+
+    <table id="letoviTable" class="table-fixed m-4 border-1 border-transparent rounded-md bg-gray-100">
+
+        <tr class="bg-gray-700 items-start text-gray-200 p-4">
+            <th class="p-3">AvioKompanija</th>
+            <th class="p-3">Polazak</th>
+            <th class="p-3">Destinacija</th>
+            <th class="p-3">Vreme Polaska</th>
+            <th class="p-3">Vreme Dolaska</th>
+            <th class="p-3">Br. Mesta</th>
+            <th class="p-3">Cena</th>
+            <th class="p-3">Status</th>
+            <th class="p-3">Brisanje</th>
+        </tr>
+
+    </table>
+
+    <div id="updateUser" class="w-1/3  min-h-32 p-6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-700 z-50 rounded-md hidden">
+        <h2 class="text-lg text-white font-thin mx-auto">Izmena informacija</h2>
+        <label class="text-red-400 text-md" id="errorUpdate"></label>
+        <div class="flex flex-wrap w-full items-start p-2">
+            <label class="w-full text-md text-white">Email:</label>
+            <input id="emailChange" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="email" />
+            <label class="w-full text-md text-white">Ime:</label>
+            <input id="imeChange" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Prezime:</label>
+            <input id="prezimeChange" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Lozinka:</label>
+            <input id="lozinkaChange" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Datum Rodjenja:</label>
+            <input id="datumRodjChange" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Pol:</label>
+            <select id="polChange" name="pol" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md">
+                <option value="M">M</option>
+                <option value="Z">Z</option>
+                <option value="N">Neopredeljeni</option>
+            </select>
+            <button id="changeUser" class="cursor-pointer bg-green-300 text-white m-1 p-2 rounded-md">Izmeni</button>
+            <button id="cancleChange" class="cursor-pointer bg-red-300 text-white m-1 p-2 rounded-md">Otkazi</button>
+        </div>
+
+
+    </div>
+    <div id="addKompanijaModal" class="w-1/3  min-h-32 p-6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-700 z-50 rounded-md hidden">
+        <h2 class="text-lg text-white font-thin mx-auto">Dodavanje kompanija</h2>
+        <label class="text-red-400 text-md" id="errorAddKompanija"></label>
+        <div class="flex flex-wrap w-full items-start p-2">
+            <label class="w-full text-md text-white">Naziv:</label>
+            <input id="nazivKompanije" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Adresa:</label>
+            <input id="adresaKompanije" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Informacije:</label>
+            <textarea id="infoKompanije" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" rows="10"></textarea>
+            <button id="dodajKompaniju" class="cursor-pointer bg-green-300 text-white m-2 w-1/3 p-2 rounded-md hidden">Dodaj</button>
+            <button id="izmeniKompaniju" class="cursor-pointer bg-green-300 text-white m-2 w-1/3 p-2 rounded-md hidden">Izmeni</button>
+            <button id="cancleAddKompaniju" class="cursor-pointer bg-red-300 text-white m-2 w-1/3 p-2 rounded-md">Otkazi</button>
+        </div>
+    </div>
+    <div id="addLetModal" class="w-1/3  min-h-32 p-6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-700 z-50 rounded-md hidden">
+        <h2 class="text-lg text-white font-thin mx-auto">Dodavanje Leta</h2>
+        <label class="text-red-400 text-md" id="errorAddLet"></label>
+        <div class="flex flex-wrap w-full items-start p-2">
+            <label class="w-full text-md text-white">Polazna Dest.:</label>
+            <input id="polaznaDest" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Odredisna Dest.:</label>
+            <input id="odredisnaDest" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+
+            <label class="w-full text-md text-white">Datum i vreme polaska:</label>
+            <input id="datVrPolaska" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Datum i vreme dolaska:</label>
+            <input id="datVrDolaska" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+
+            <label class="w-full text-md text-white">Avio Kompanija:</label>
+            <input id="avioKompanijaLeta" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="text" />
+            <label class="w-full text-md text-white">Cena (po osobi):</label>
+            <input id="cenaLeta" class="p-1 bg-gray-400 w-2/3 m-1 rounded-md" type="number" />
+            <button id="dodajLet" class="cursor-pointer bg-green-300 text-white m-2 w-1/3 p-2 rounded-md">Dodaj</button>
+
+            <button id="cancleAddLet" class="cursor-pointer bg-red-300 text-white m-2 w-1/3 p-2 rounded-md">Otkazi</button>
+        </div>
+
+
+    </div>
+    <div id="modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+    <div id="deleteModal" class="w-1/3  min-h-32 p-6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-700 z-50 rounded-md hidden">
+        <h2 class="text-lg text-white font-thin mx-auto">Da li ste sigurni da zelite da obrisete ovu Aviokompaniju?</h2>
+        <div class="flex flex-wrap w-full items-center p-2">
+            <button id="obrisiKompaniju" class="p-2 text-white rounded-md bg-red-300 cursor-pointer mx-3">Yes</button>
+            <button id="cancleDelete" class="p-2 text-white rounded-md bg-transparent border-1 border-red-400 cursor-pointer mx-3">No</button>
+        </div>
+
+
+    </div>
+</body>
+</html>
