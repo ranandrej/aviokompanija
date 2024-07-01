@@ -181,5 +181,25 @@
         "Status": 1
       }
     ]
+  },
+  {
+    "Naziv": "Lufthansa",
+    "Adresa": "London,South Kensigton 33",
+    "Informacije": "Lufthansa is a great airlane company!",
+    "Letovi": [
+      {
+        "Id": "5",
+        "AvioKompanija": "Lufthansa",
+        "PolaznaDest": "Split",
+        "OdredisnaDest": "Korzika",
+        "DatVrPolaska": "31/06/2024 11:00",
+        "DatVrDolaska": "31/06/2024 14:50",
+        "BrSlobodnih": 30,
+        "BrZauzetih": 0,
+        "Cena": 12000,
+        "Status": 0
+      }
+    ],
+    "Recenzije": []
   }
 ]

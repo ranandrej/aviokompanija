@@ -102,23 +102,36 @@
 
         <div class="p-6 max-w-1/2 flex mb-4 flex-wrap items-start bg-cover bg-center rounded-md" style="background-image: url('/Content/searchBackground.jpg');">
             <div class="flex w-full">
-                <input class="bg-gray-300 p-2 m-2 rounded-md w-full" id="startDest" placeholder="Unesite polaznu destinaciju..." />
-                <input class="bg-gray-300 p-2 m-2 rounded-md w-full" id="endDest" placeholder="Unesite odredisnu destinaciju..." />
-            </div>
+                <div class="w-full flex-flex-wrap mx-2">
+                    <label class="w-full text-white text-md">Polazna Dest.:</label>
+                    <input class="bg-gray-300 p-2 m-2 rounded-md w-full" id="startDest" placeholder="Unesite polaznu destinaciju..." />
+                </div>
+                <div class="w-full flex-flex-wrap mx-2">
+                    <label class="w-full text-white text-md">Odredisna Dest.:</label>
+                    <input class="bg-gray-300 p-2 m-2 rounded-md w-full" id="endDest" placeholder="Unesite odredisnu destinaciju..." />
+                </div>
+                </div>
             <div class="flex w-full">
-                <input class="bg-gray-300 p-2 m-2 w-full rounded-md" id="startDateStr" type="date" />
-                <input class="bg-gray-300 p-2 m-2 w-full rounded-md" id="endDateStr" type="date" placeholder="Datum povratka..." />
+                <div class="w-full flex-flex-wrap mx-2">
+                    <label class="w-full text-white text-md">Datum Polaska:</label>
+                    <input class="bg-gray-300 p-2 m-2 w-full rounded-md" id="startDateStr" type="date" />
+                </div>
+                <div class="w-full flex-flex-wrap mx-2">
+                    <label class="w-full text-white text-md">Datum Dolaska:</label>
+                    <input class="bg-gray-300 p-2 m-2 w-full rounded-md" id="endDateStr" type="date" placeholder="Datum povratka..." />
+                </div>
+                </div>
+                <div class="flex w-1/2 flex-wrap">
+                    <label class="w-full text-gray-200 white">Avio Kompanija:</label>
+                    <select class="bg-gray-300 p-2 m-2 w-full rounded-md" id="kompanijeFilter" name="avioKompanija">
+                        <option value="AirSerbia">AirSerbia</option>
+                        <option value="WizzAir">WizzAir</option>
+                        <option value="RyanAir">RyanAir</option>
+                    </select>
+                </div>
+                <button id="searchBtn" class="bg-green-400 rounded-md mx-1 mt-8 cursor-pointer p-2 font-thin text-white"><i class="bi bi-search"></i> Pretrazi</button>
+                <button id="clearBtn" class="bg-blue-400 rounded-md mx-1 mt-8 cursor-pointer p-2 font-thin text-white"><i class="bi bi-x"></i> Ponisti Pretragu</button>
             </div>
-            <div class="flex w-1/2">
-                <select class="bg-gray-300 p-2 m-2 w-full rounded-md" name="avioKompanija">
-                    <option value="AirSerbia">AirSerbia</option>
-                    <option value="WizzAir">WizzAir</option>
-                    <option value="RyanAir">RyanAir</option>
-                </select>
-            </div>
-            <button id="searchBtn" class="bg-green-400 rounded-md m-2 cursor-pointer p-2 font-thin text-white"><i class="bi bi-search"></i> Pretrazi</button>
-            <button id="clearBtn" class="bg-blue-400 rounded-md m-2 cursor-pointer p-2 font-thin text-white"><i class="bi bi-x"></i> Ponisti Pretragu</button>
-        </div>
         <div class="flex flex-wrap m-4 w-full p-3">
             <h5 class="w-full font-thin mb-1">Sortiraj po:</h5>
             <button id="cenaRastuce" class="bg-gray-200 rounded-md cursor-pointer m-3 p-2 font-thin text-gray-500"><i class="bi bi-arrow-up"></i> Ceni rastuce</button>

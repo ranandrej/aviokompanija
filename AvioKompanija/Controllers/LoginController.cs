@@ -129,7 +129,7 @@ namespace AvioKompanija.Controllers
             var loggedUser = HttpContext.Current.Session["LoggedUser"] as Korisnik;
             if (loggedUser == null)
             {
-                return Unauthorized();
+                return Ok("Neprijavljeni korisnik");
             }
 
             return Ok(loggedUser);

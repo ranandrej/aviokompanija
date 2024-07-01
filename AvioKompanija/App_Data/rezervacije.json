@@ -99,20 +99,20 @@
       "Rezervacije": []
     },
     "Let": {
-      "Id": "1",
-      "AvioKompanija": "RyanAir",
-      "PolaznaDest": "London",
-      "OdredisnaDest": "Zagreb",
-      "DatVrPolaska": "29/08/2024 11:00",
-      "DatVrDolaska": "29/08/2024 11:35",
-      "BrSlobodnih": 27,
-      "BrZauzetih": 3,
-      "Cena": 5000,
+      "Id": "5",
+      "AvioKompanija": "Lufthansa",
+      "PolaznaDest": "Split",
+      "OdredisnaDest": "Korzika",
+      "DatVrPolaska": "31/06/2024 11:00",
+      "DatVrDolaska": "31/06/2024 14:50",
+      "BrSlobodnih": 29,
+      "BrZauzetih": 1,
+      "Cena": 12000,
       "Status": 0
     },
-    "BrojPutnika": 3,
-    "UkupnaCena": 15000,
+    "BrojPutnika": 1,
+    "UkupnaCena": 12000,
     "Status": 0,
-    "Id": "9"
+    "Id": "10"
   }
 ]

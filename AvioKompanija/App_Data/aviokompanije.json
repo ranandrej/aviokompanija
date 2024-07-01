@@ -3,7 +3,32 @@
     "Naziv": "WizzAir",
     "Adresa": "Kralja Petra Prvog 22-Luton",
     "Informacije": "Wizz Air Holdings plc is a Hungarian ultra low-cost carrier group registered in Jersey. The company includes the subsidiaries Wizz Air Hungary, Wizz Air Malta, Wizz Air Abu Dhabi and Wizz Air UK,Wizz Air China",
-    "Letovi": [],
+    "Letovi": [
+      {
+        "Id": "2",
+        "AvioKompanija": "WizzAir",
+        "PolaznaDest": "London",
+        "OdredisnaDest": "Zagreb",
+        "DatVrPolaska": "29/08/2024 12:00",
+        "DatVrDolaska": "29/08/2024 13:00",
+        "BrSlobodnih": 27,
+        "BrZauzetih": 3,
+        "Cena": 4500,
+        "Status": 1
+      },
+      {
+        "Id": "3",
+        "AvioKompanija": "WizzAir",
+        "PolaznaDest": "Madrid",
+        "OdredisnaDest": "Moscov",
+        "DatVrPolaska": "29/08/2024 10:00",
+        "DatVrDolaska": "29/08/2024 13:30",
+        "BrSlobodnih": 27,
+        "BrZauzetih": 3,
+        "Cena": 11000,
+        "Status": 0
+      }
+    ],
     "Recenzije": []
   },
   {
@@ -21,6 +46,18 @@
         "BrSlobodnih": 27,
         "BrZauzetih": 3,
         "Cena": 5000,
+        "Status": 0
+      },
+      {
+        "Id": "4",
+        "AvioKompanija": "RyanAir",
+        "PolaznaDest": "Ibiza",
+        "OdredisnaDest": "Belgrade",
+        "DatVrPolaska": "31/08/2024 11:00",
+        "DatVrDolaska": "31/08/2024 13:30",
+        "BrSlobodnih": 30,
+        "BrZauzetih": 0,
+        "Cena": 10000,
         "Status": 0
       }
     ],
@@ -140,6 +177,132 @@
         "Naslov": "Svidja mi se ryanAir",
         "Ocena": 0,
         "Sadrzaj": "Veoma dobra kompanija sa veoma prijatinm i nasmejanim osobljem,sve pohvale!",
+        "SlikaPath": "",
+        "Status": 1
+      }
+    ]
+  },
+  {
+    "Naziv": "Lufthansa",
+    "Adresa": "London,South Kensigton 33",
+    "Informacije": "Lufthansa is a great airlane company!",
+    "Letovi": [],
+    "Recenzije": [
+      {
+        "Id": "1",
+        "Recezent": {
+          "KorisnickoIme": "jovkela",
+          "Lozinka": "mozeneka",
+          "Ime": "Jovan",
+          "Prezime": "Jovelic",
+          "Email": "jovanjov@gmail.com",
+          "DatumRodjenja": "07/05/2007",
+          "Pol": "M",
+          "Tip": 0,
+          "Rezervacije": []
+        },
+        "AvioKompanija": {
+          "Naziv": "Lufthansa",
+          "Adresa": "London,South Kensigton 33",
+          "Informacije": "Lufthansa is a great airlane company!",
+          "Letovi": [
+            {
+              "Id": "5",
+              "AvioKompanija": "Lufthansa",
+              "PolaznaDest": "Split",
+              "OdredisnaDest": "Korzika",
+              "DatVrPolaska": "31/06/2024 11:00",
+              "DatVrDolaska": "31/06/2024 14:50",
+              "BrSlobodnih": 29,
+              "BrZauzetih": 1,
+              "Cena": 12000,
+              "Status": 0
+            }
+          ],
+          "Recenzije": []
+        },
+        "Naslov": "Lose",
+        "Ocena": 3,
+        "Sadrzaj": "Ne svidja mi se ova kompanija...",
+        "SlikaPath": "",
+        "Status": 1
+      },
+      {
+        "Id": "2",
+        "Recezent": {
+          "KorisnickoIme": "ranandrej",
+          "Lozinka": "sifra123",
+          "Ime": "Andrej",
+          "Prezime": "Ranisavljevic",
+          "Email": "ranandrej@gmail.com",
+          "DatumRodjenja": "16/08/2004",
+          "Pol": "N",
+          "Tip": 0,
+          "Rezervacije": null
+        },
+        "AvioKompanija": {
+          "Naziv": "Lufthansa",
+          "Adresa": "London,South Kensigton 33",
+          "Informacije": "Lufthansa is a great airlane company!",
+          "Letovi": [
+            {
+              "Id": "5",
+              "AvioKompanija": "Lufthansa",
+              "PolaznaDest": "Split",
+              "OdredisnaDest": "Korzika",
+              "DatVrPolaska": "31/06/2024 11:00",
+              "DatVrDolaska": "31/06/2024 14:50",
+              "BrSlobodnih": 29,
+              "BrZauzetih": 1,
+              "Cena": 12000,
+              "Status": 0
+            }
+          ],
+          "Recenzije": [
+            {
+              "Id": "1",
+              "Recezent": {
+                "KorisnickoIme": "jovkela",
+                "Lozinka": "mozeneka",
+                "Ime": "Jovan",
+                "Prezime": "Jovelic",
+                "Email": "jovanjov@gmail.com",
+                "DatumRodjenja": "07/05/2007",
+                "Pol": "M",
+                "Tip": 0,
+                "Rezervacije": []
+              },
+              "AvioKompanija": {
+                "Naziv": "Lufthansa",
+                "Adresa": "London,South Kensigton 33",
+                "Informacije": "Lufthansa is a great airlane company!",
+                "Letovi": [
+                  {
+                    "Id": "5",
+                    "AvioKompanija": "Lufthansa",
+                    "PolaznaDest": "Split",
+                    "OdredisnaDest": "Korzika",
+                    "DatVrPolaska": "31/06/2024 11:00",
+                    "DatVrDolaska": "31/06/2024 14:50",
+                    "BrSlobodnih": 29,
+                    "BrZauzetih": 1,
+                    "Cena": 12000,
+                    "Status": 0
+                  }
+                ],
+                "Recenzije": []
+              },
+              "Naslov": "Lose",
+              "Ocena": 3,
+              "Sadrzaj": "Ne svidja mi se ova kompanija...",
+              "SlikaPath": "",
+              "Status": 1
+            }
+          ]
+        },
+        "Naslov": "Pa dobro je sve je okej",
+        "Ocena": 4,
+        "Sadrzaj": "Moze samo da sedista budu veca",
         "SlikaPath": "",
         "Status": 1
       }

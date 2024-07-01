@@ -1,7 +1,9 @@
 ﻿function loadKompanije() {
     var sectionBody = $("#avioKompanije")
+    var filterBody = $("#kompanijeFilter")
+    filterBody.empty()
     $.get("/api/letovi/aviokompanije", function (data, status) {
-
+        filterBody.append('<option value="">Sve kompanije</option>')
         $.each(data, function (index, kompanija) {
             var imgSrc = '/Content/' + kompanija.Naziv + '.png'; // Construct image source path
 
@@ -12,6 +14,7 @@
                     <p class="text-sm w-full">Adresa:${kompanija.Adresa}</p>
                     </div>
                 </div>`;
+            filterBody.append(`<option value="${kompanija.Naziv}">${kompanija.Naziv}</option>`)
             sectionBody.append(card);
         });
     });
@@ -21,9 +24,10 @@ function searchFlights(startDest, endDest, startDateStr, endDateStr, avioKompani
 
     $.get('/api/letovi', { startDest: startDest, endDest: endDest, startDateStr: startDateStr, endDateStr: endDateStr, avioKompanija: avioKompanija })
         .done(function (data) {
-
+            console.log(startDateStr + " " + endDateStr)
             // Očisti trenutni sadržaj tabele
             updateTableActive(data)
+            console.log("data:" +JSON.stringify(data))
         })
 }
 
@@ -99,26 +103,30 @@ function getCurrentUser() {
     $.get('/api/login/currentuser')
         .done(function (userResponse) {
             console.log("Logged in user:", userResponse);
-            $("#userInfo").show();
-            $("#userUsername").append(userResponse.KorisnickoIme);
-            switch (userResponse.Tip) {
-                case 0:
-                    
-                    $("#userRole").text("Role: Putnik");
-                    $("#userUsername").attr("href", "Pages/Profile.html");
-                    break
-                case 1:
-                    
-                    $("#userRole").text("Role: Admin");
-                    $("#userUsername").attr("href", "Pages/AdminPage.html");
-                    break
-                default:
-                    break;
+            if (userResponse != "Neprijavljeni korisnik") {
 
+
+                $("#userInfo").show();
+                $("#userUsername").append(userResponse.KorisnickoIme);
+                switch (userResponse.Tip) {
+                    case 0:
+
+                        $("#userRole").text("Role: Putnik");
+                        $("#userUsername").attr("href", "Pages/Profile.html");
+                        break
+                    case 1:
+
+                        $("#userRole").text("Role: Admin");
+                        $("#userUsername").attr("href", "Pages/AdminPage.html");
+                        break
+                    default:
+                        break;
+
+                }
+
+
+                $("#prijavaButton").hide()
             }
-
-         
-            $("#prijavaButton").hide()
             return userResponse
            
             // Dodajte ostala polja po potrebi

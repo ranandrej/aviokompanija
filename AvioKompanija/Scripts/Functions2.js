@@ -306,7 +306,7 @@ function ucitajRecenzijeOdobrene(naziv) {
     $.get('/api/letovi/recenzije', { nazivKompanije: naziv })
         .done(function (response) {
 
-            console.log("Recenzije:" + "Nestoooooooooo");
+            
             recenzijeBody.append(' <h2 class="font-thin text-xl m-3 w-full">Recenzije:</h2>')
             $.each(response, function (index, recenzija) {
                 var ocenaIcons = '';
@@ -318,7 +318,7 @@ function ucitajRecenzijeOdobrene(naziv) {
                     }
                 }
                 var rec= `<div class="w-full p-3 bg-gray-700 rounded-md min-h-52 flex m-4 flex-wrap">
-                    <label><span id="status class="w-full text-green-400">${getRecStatus(recenzija.Status)}</span></label>
+                    <label class="w-full text-green-500">${getRecStatus(recenzija.Status)}</label>
                     <h2 class="w-full mb-1 ml-2 text-xl text-white font-thin"><i class="bi bi-person text-green-500"></i> ${recenzija.Recezent.KorisnickoIme}</h2>
                     <p class="text-md flex w-full mt-0 mb-1 ml-2">${ocenaIcons}</p>
                     <p class="text-md text-white w-full mb-1 ml-2">Ocena:<span class="text-green-400">${recenzija.Ocena}</span> / 5</p>

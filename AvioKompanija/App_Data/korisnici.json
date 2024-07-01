@@ -24,12 +24,12 @@
   {
     "KorisnickoIme": "jovkela",
     "Lozinka": "mozeneka",
-    "Ime": "Jovan",
+    "Ime": "Jovica",
     "Prezime": "Jovelic",
     "Email": "jovanjov@gmail.com",
-    "DatumRodjenja": "07/05/2007",
+    "DatumRodjenja": "05/07/2007",
     "Pol": "M",
     "Tip": 0,
-    "Rezervacije": []
+    "Rezervacije": null
   }
 ]

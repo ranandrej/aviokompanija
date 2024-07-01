@@ -178,6 +178,7 @@
     <Content Include="App_Data\rezervacije.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\AirSerbia.png" />
+    <Content Include="Content\Lufthansa.png" />
     <Content Include="Content\RyanAir.png" />
     <Content Include="Content\searchBackground.jpg" />
     <Content Include="Content\WizzAir.png" />

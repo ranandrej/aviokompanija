@@ -6,8 +6,8 @@
     "OdredisnaDest": "Zagreb",
     "DatVrPolaska": "29/08/2024 11:00",
     "DatVrDolaska": "29/08/2024 13:00",
-    "BrSlobodnih": 27,
-    "BrZauzetih": 3,
+    "BrSlobodnih": 30,
+    "BrZauzetih": 0,
     "Cena": 5000,
     "Status": 0
   },
@@ -45,6 +45,18 @@
     "BrSlobodnih": 30,
     "BrZauzetih": 0,
     "Cena": 10000,
+    "Status": 0
+  },
+  {
+    "Id": "5",
+    "AvioKompanija": "Lufthansa",
+    "PolaznaDest": "Split",
+    "OdredisnaDest": "Korzika",
+    "DatVrPolaska": "31/06/2024 11:00",
+    "DatVrDolaska": "31/06/2024 14:50",
+    "BrSlobodnih": 29,
+    "BrZauzetih": 1,
+    "Cena": 12000,
     "Status": 0
   }
 ]

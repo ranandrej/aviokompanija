@@ -18,44 +18,50 @@
             var naziv = urlParams.get('naziv');
             let rating = 0
             // Funkcija za učitavanje detalja o aviokompaniji
-            if (naziv != "") {
+            
 
-                $.get('/api/letovi/aviokompanija', { naziv: naziv })
-                    .done(function (data) {
-                        var imgSrc = '/Content/' + data.Naziv + '.png';
-                        $('#slika').attr('src', imgSrc);
-                        $('#naziv').text(data.Naziv)
-                        $('#opis').text(data.Informacije)
-                        $('#adresa').text(data.Adresa)
-                        currentKompanija = data
-                        console.log(currentKompanija)
-                        
-
-                    })
-                    .fail(function (xhr, status, error) {
-                        console.log("Failed to get current kompanija:", error);
-
-                    });
-
+              
                
                 $.get('/api/login/currentuser')
                     .done(function (userResponse) {
                         $("#recenzija").show()
                         currentUser = userResponse
                         console.log(currentUser)
-                        if (currentUser.Tip == 1) {
-                            ucitajRecenzije(naziv)
-                            $("#recenzija").hide()
-                        } else {
-                            ucitajRecenzijeOdobrene(naziv)
-                        }
+                        
                     })
                     .fail(function (xhr, status, error) {
                         console.log("Failed to get current user:", error);
                         $("#message").text("Failed to get current user: " + error);
                         
+
+                        
                     });
-            }
+            $.get('/api/letovi/aviokompanija', { naziv: naziv })
+                .done(function (data) {
+                    var imgSrc = '/Content/' + data.Naziv + '.png';
+                    $('#slika').attr('src', imgSrc);
+                    $('#naziv').text(data.Naziv)
+                    $('#opis').text(data.Informacije)
+                    $('#adresa').text(data.Adresa)
+                    currentKompanija = data
+                    console.log(currentKompanija)
+                    if (currentUser == "Neprijavljeni korisnik") {
+                        ucitajRecenzijeOdobrene(naziv)
+                        $("#recenzija").hide()
+                    }
+                    if (currentUser.Tip == 1) {
+                        ucitajRecenzije(naziv)
+                        $("#recenzija").hide()
+                    } else if (currentUser.Tip==0) {
+                        ucitajRecenzijeOdobrene(naziv)
+                    }
+
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Failed to get current kompanija:", error);
+
+                });
+
             
             $("#sendRecenzija").click(function () {
                 var recenzija = {
