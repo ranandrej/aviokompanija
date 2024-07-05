@@ -114,5 +114,34 @@
     "UkupnaCena": 12000,
     "Status": 0,
     "Id": "10"
+  },
+  {
+    "Korisnik": {
+      "KorisnickoIme": "ranandrej",
+      "Lozinka": "sifra123",
+      "Ime": "Andrej",
+      "Prezime": "Ranisavljevic",
+      "Email": "ranandrej@gmail.com",
+      "DatumRodjenja": "16/08/2004",
+      "Pol": "N",
+      "Tip": 0,
+      "Rezervacije": null
+    },
+    "Let": {
+      "Id": "6",
+      "AvioKompanija": "AirSerbia",
+      "PolaznaDest": "Beograd",
+      "OdredisnaDest": "Istanbul",
+      "DatVrPolaska": "03/07/2024 10:00",
+      "DatVrDolaska": "03/07/2024 10:03",
+      "BrSlobodnih": 20,
+      "BrZauzetih": 10,
+      "Cena": 10000,
+      "Status": 0
+    },
+    "BrojPutnika": 10,
+    "UkupnaCena": 100000,
+    "Status": 0,
+    "Id": "11"
   }
 ]

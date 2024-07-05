@@ -43,8 +43,8 @@
         "OdredisnaDest": "Zagreb",
         "DatVrPolaska": "29/08/2024 11:00",
         "DatVrDolaska": "29/08/2024 13:00",
-        "BrSlobodnih": 27,
-        "BrZauzetih": 3,
+        "BrSlobodnih": 30,
+        "BrZauzetih": 0,
         "Cena": 5000,
         "Status": 0
       },
@@ -99,7 +99,7 @@
         "Ocena": 3,
         "Sadrzaj": "Sasvim zadovoljan!",
         "SlikaPath": "",
-        "Status": 2
+        "Status": 1
       },
       {
         "Id": "2",
@@ -178,7 +178,177 @@
         "Ocena": 0,
         "Sadrzaj": "Veoma dobra kompanija sa veoma prijatinm i nasmejanim osobljem,sve pohvale!",
         "SlikaPath": "",
-        "Status": 1
+        "Status": 2
+      },
+      {
+        "Id": "3",
+        "Recezent": {
+          "KorisnickoIme": "ranandrej",
+          "Lozinka": "sifra123",
+          "Ime": "Andrej",
+          "Prezime": "Ranisavljevic",
+          "Email": "ranandrej@gmail.com",
+          "DatumRodjenja": "16/08/2004",
+          "Pol": "N",
+          "Tip": 0,
+          "Rezervacije": null
+        },
+        "AvioKompanija": {
+          "Naziv": "RyanAir",
+          "Adresa": "Marka Kraljevica 3-Arandjelovac",
+          "Informacije": "Ryanair is an Irish ultra low-cost carrier group headquartered in Swords, Dublin, Ireland. The parent company Ryanair Holdings plc includes subsidiaries Ryanair DAC, Malta Air, Buzz, Lauda Europe and Ryanair UK. Ryanair DAC, the oldest airline of the group, was founded in 1984.",
+          "Letovi": [
+            {
+              "Id": "1",
+              "AvioKompanija": "RyanAir",
+              "PolaznaDest": "London",
+              "OdredisnaDest": "Zagreb",
+              "DatVrPolaska": "29/08/2024 11:00",
+              "DatVrDolaska": "29/08/2024 13:00",
+              "BrSlobodnih": 30,
+              "BrZauzetih": 0,
+              "Cena": 5000,
+              "Status": 0
+            },
+            {
+              "Id": "4",
+              "AvioKompanija": "RyanAir",
+              "PolaznaDest": "Ibiza",
+              "OdredisnaDest": "Belgrade",
+              "DatVrPolaska": "31/08/2024 11:00",
+              "DatVrDolaska": "31/08/2024 13:30",
+              "BrSlobodnih": 30,
+              "BrZauzetih": 0,
+              "Cena": 10000,
+              "Status": 0
+            }
+          ],
+          "Recenzije": [
+            {
+              "Id": "1",
+              "Recezent": {
+                "KorisnickoIme": "username",
+                "Lozinka": "password",
+                "Ime": "andrej",
+                "Prezime": "andr",
+                "Email": "mail@gmail.com",
+                "DatumRodjenja": "07/12/2000",
+                "Pol": "M",
+                "Tip": 1,
+                "Rezervacije": null
+              },
+              "AvioKompanija": {
+                "Naziv": "RyanAir",
+                "Adresa": "Marka Kraljevica 3-Arandjelovac",
+                "Informacije": "Ryanair is an Irish ultra low-cost carrier group headquartered in Swords, Dublin, Ireland. The parent company Ryanair Holdings plc includes subsidiaries Ryanair DAC, Malta Air, Buzz, Lauda Europe and Ryanair UK. Ryanair DAC, the oldest airline of the group, was founded in 1984.",
+                "Letovi": [
+                  {
+                    "Id": "1",
+                    "AvioKompanija": "RyanAir",
+                    "PolaznaDest": "London",
+                    "OdredisnaDest": "Zagreb",
+                    "DatVrPolaska": "29/08/2024",
+                    "DatVrDolaska": "29/08/2024",
+                    "BrSlobodnih": 27,
+                    "BrZauzetih": 3,
+                    "Cena": 5000,
+                    "Status": 0
+                  }
+                ],
+                "Recenzije": []
+              },
+              "Naslov": "Dobri utisci",
+              "Ocena": 3,
+              "Sadrzaj": "Sasvim zadovoljan!",
+              "SlikaPath": "",
+              "Status": 1
+            },
+            {
+              "Id": "2",
+              "Recezent": {
+                "KorisnickoIme": "ranandrej",
+                "Lozinka": "sifra123",
+                "Ime": "Andrej",
+                "Prezime": "Ranisavljevic",
+                "Email": "ranandrej@gmail.com",
+                "DatumRodjenja": "16/08/2004",
+                "Pol": "N",
+                "Tip": 0,
+                "Rezervacije": null
+              },
+              "AvioKompanija": {
+                "Naziv": "RyanAir",
+                "Adresa": "Marka Kraljevica 3-Arandjelovac",
+                "Informacije": "Ryanair is an Irish ultra low-cost carrier group headquartered in Swords, Dublin, Ireland. The parent company Ryanair Holdings plc includes subsidiaries Ryanair DAC, Malta Air, Buzz, Lauda Europe and Ryanair UK. Ryanair DAC, the oldest airline of the group, was founded in 1984.",
+                "Letovi": [
+                  {
+                    "Id": "1",
+                    "AvioKompanija": "RyanAir",
+                    "PolaznaDest": "London",
+                    "OdredisnaDest": "Zagreb",
+                    "DatVrPolaska": "29/08/2024",
+                    "DatVrDolaska": "29/08/2024",
+                    "BrSlobodnih": 27,
+                    "BrZauzetih": 3,
+                    "Cena": 5000,
+                    "Status": 0
+                  }
+                ],
+                "Recenzije": [
+                  {
+                    "Id": "1",
+                    "Recezent": {
+                      "KorisnickoIme": "username",
+                      "Lozinka": "password",
+                      "Ime": "andrej",
+                      "Prezime": "andr",
+                      "Email": "mail@gmail.com",
+                      "DatumRodjenja": "07/12/2000",
+                      "Pol": "M",
+                      "Tip": 1,
+                      "Rezervacije": null
+                    },
+                    "AvioKompanija": {
+                      "Naziv": "RyanAir",
+                      "Adresa": "Marka Kraljevica 3-Arandjelovac",
+                      "Informacije": "Ryanair is an Irish ultra low-cost carrier group headquartered in Swords, Dublin, Ireland. The parent company Ryanair Holdings plc includes subsidiaries Ryanair DAC, Malta Air, Buzz, Lauda Europe and Ryanair UK. Ryanair DAC, the oldest airline of the group, was founded in 1984.",
+                      "Letovi": [
+                        {
+                          "Id": "1",
+                          "AvioKompanija": "RyanAir",
+                          "PolaznaDest": "London",
+                          "OdredisnaDest": "Zagreb",
+                          "DatVrPolaska": "29/08/2024",
+                          "DatVrDolaska": "29/08/2024",
+                          "BrSlobodnih": 27,
+                          "BrZauzetih": 3,
+                          "Cena": 5000,
+                          "Status": 0
+                        }
+                      ],
+                      "Recenzije": []
+                    },
+                    "Naslov": "Dobri utisci",
+                    "Ocena": 3,
+                    "Sadrzaj": "Sasvim zadovoljan!",
+                    "SlikaPath": "",
+                    "Status": 2
+                  }
+                ]
+              },
+              "Naslov": "Svidja mi se ryanAir",
+              "Ocena": 0,
+              "Sadrzaj": "Veoma dobra kompanija sa veoma prijatinm i nasmejanim osobljem,sve pohvale!",
+              "SlikaPath": "",
+              "Status": 2
+            }
+          ]
+        },
+        "Naslov": "Neska",
+        "Ocena": 4,
+        "Sadrzaj": "Komentar",
+        "SlikaPath": "",
+        "Status": 0
       }
     ]
   },
@@ -186,7 +356,20 @@
     "Naziv": "Lufthansa",
     "Adresa": "London,South Kensigton 33",
     "Informacije": "Lufthansa is a great airlane company!",
-    "Letovi": [],
+    "Letovi": [
+      {
+        "Id": "5",
+        "AvioKompanija": "Lufthansa",
+        "PolaznaDest": "Split",
+        "OdredisnaDest": "Korzika",
+        "DatVrPolaska": "31/06/2024 11:00",
+        "DatVrDolaska": "31/06/2024 14:50",
+        "BrSlobodnih": 29,
+        "BrZauzetih": 1,
+        "Cena": 12000,
+        "Status": 0
+      }
+    ],
     "Recenzije": [
       {
         "Id": "1",
@@ -307,5 +490,12 @@
         "Status": 1
       }
     ]
+  },
+  {
+    "Naziv": "AirSerbia",
+    "Adresa": "Dobracina 27,Beograd",
+    "Informacije": "nesto",
+    "Letovi": [],
+    "Recenzije": []
   }
 ]

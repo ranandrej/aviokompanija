@@ -31,5 +31,16 @@
     "Pol": "M",
     "Tip": 0,
     "Rezervacije": null
+  },
+  {
+    "KorisnickoIme": "neki",
+    "Lozinka": "sifra123",
+    "Ime": "Stefan",
+    "Prezime": "Nikolic",
+    "Email": "email@gmail.com",
+    "DatumRodjenja": "06/09/2009",
+    "Pol": "M",
+    "Tip": 0,
+    "Rezervacije": null
   }
 ]

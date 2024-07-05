@@ -43,8 +43,8 @@
         "OdredisnaDest": "Zagreb",
         "DatVrPolaska": "29/08/2024 11:00",
         "DatVrDolaska": "29/08/2024 13:00",
-        "BrSlobodnih": 27,
-        "BrZauzetih": 3,
+        "BrSlobodnih": 30,
+        "BrZauzetih": 0,
         "Cena": 5000,
         "Status": 0
       },
@@ -194,9 +194,148 @@
         "OdredisnaDest": "Korzika",
         "DatVrPolaska": "31/06/2024 11:00",
         "DatVrDolaska": "31/06/2024 14:50",
+        "BrSlobodnih": 29,
+        "BrZauzetih": 1,
+        "Cena": 12000,
+        "Status": 0
+      }
+    ],
+    "Recenzije": [
+      {
+        "Id": "1",
+        "Recezent": {
+          "KorisnickoIme": "jovkela",
+          "Lozinka": "mozeneka",
+          "Ime": "Jovan",
+          "Prezime": "Jovelic",
+          "Email": "jovanjov@gmail.com",
+          "DatumRodjenja": "07/05/2007",
+          "Pol": "M",
+          "Tip": 0,
+          "Rezervacije": []
+        },
+        "AvioKompanija": {
+          "Naziv": "Lufthansa",
+          "Adresa": "London,South Kensigton 33",
+          "Informacije": "Lufthansa is a great airlane company!",
+          "Letovi": [
+            {
+              "Id": "5",
+              "AvioKompanija": "Lufthansa",
+              "PolaznaDest": "Split",
+              "OdredisnaDest": "Korzika",
+              "DatVrPolaska": "31/06/2024 11:00",
+              "DatVrDolaska": "31/06/2024 14:50",
+              "BrSlobodnih": 29,
+              "BrZauzetih": 1,
+              "Cena": 12000,
+              "Status": 0
+            }
+          ],
+          "Recenzije": []
+        },
+        "Naslov": "Lose",
+        "Ocena": 3,
+        "Sadrzaj": "Ne svidja mi se ova kompanija...",
+        "SlikaPath": "",
+        "Status": 1
+      },
+      {
+        "Id": "2",
+        "Recezent": {
+          "KorisnickoIme": "ranandrej",
+          "Lozinka": "sifra123",
+          "Ime": "Andrej",
+          "Prezime": "Ranisavljevic",
+          "Email": "ranandrej@gmail.com",
+          "DatumRodjenja": "16/08/2004",
+          "Pol": "N",
+          "Tip": 0,
+          "Rezervacije": null
+        },
+        "AvioKompanija": {
+          "Naziv": "Lufthansa",
+          "Adresa": "London,South Kensigton 33",
+          "Informacije": "Lufthansa is a great airlane company!",
+          "Letovi": [
+            {
+              "Id": "5",
+              "AvioKompanija": "Lufthansa",
+              "PolaznaDest": "Split",
+              "OdredisnaDest": "Korzika",
+              "DatVrPolaska": "31/06/2024 11:00",
+              "DatVrDolaska": "31/06/2024 14:50",
+              "BrSlobodnih": 29,
+              "BrZauzetih": 1,
+              "Cena": 12000,
+              "Status": 0
+            }
+          ],
+          "Recenzije": [
+            {
+              "Id": "1",
+              "Recezent": {
+                "KorisnickoIme": "jovkela",
+                "Lozinka": "mozeneka",
+                "Ime": "Jovan",
+                "Prezime": "Jovelic",
+                "Email": "jovanjov@gmail.com",
+                "DatumRodjenja": "07/05/2007",
+                "Pol": "M",
+                "Tip": 0,
+                "Rezervacije": []
+              },
+              "AvioKompanija": {
+                "Naziv": "Lufthansa",
+                "Adresa": "London,South Kensigton 33",
+                "Informacije": "Lufthansa is a great airlane company!",
+                "Letovi": [
+                  {
+                    "Id": "5",
+                    "AvioKompanija": "Lufthansa",
+                    "PolaznaDest": "Split",
+                    "OdredisnaDest": "Korzika",
+                    "DatVrPolaska": "31/06/2024 11:00",
+                    "DatVrDolaska": "31/06/2024 14:50",
+                    "BrSlobodnih": 29,
+                    "BrZauzetih": 1,
+                    "Cena": 12000,
+                    "Status": 0
+                  }
+                ],
+                "Recenzije": []
+              },
+              "Naslov": "Lose",
+              "Ocena": 3,
+              "Sadrzaj": "Ne svidja mi se ova kompanija...",
+              "SlikaPath": "",
+              "Status": 1
+            }
+          ]
+        },
+        "Naslov": "Pa dobro je sve je okej",
+        "Ocena": 4,
+        "Sadrzaj": "Moze samo da sedista budu veca",
+        "SlikaPath": "",
+        "Status": 1
+      }
+    ]
+  },
+  {
+    "Naziv": "AirSerbia",
+    "Adresa": "Dobracina 27,Beograd",
+    "Informacije": "nesto",
+    "Letovi": [
+      {
+        "Id": "6",
+        "AvioKompanija": "AirSerbia",
+        "PolaznaDest": "Beograd",
+        "OdredisnaDest": "Istanbul",
+        "DatVrPolaska": "03/07/2024 10:00",
+        "DatVrDolaska": "03/07/2024 10:03",
         "BrSlobodnih": 30,
         "BrZauzetih": 0,
-        "Cena": 12000,
+        "Cena": 10000,
         "Status": 0
       }
     ],

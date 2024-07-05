@@ -58,5 +58,17 @@
     "BrZauzetih": 1,
     "Cena": 12000,
     "Status": 0
+  },
+  {
+    "Id": "6",
+    "AvioKompanija": "AirSerbia",
+    "PolaznaDest": "Beograd",
+    "OdredisnaDest": "Istanbul",
+    "DatVrPolaska": "03/07/2024 10:00",
+    "DatVrDolaska": "03/07/2024 10:03",
+    "BrSlobodnih": 20,
+    "BrZauzetih": 10,
+    "Cena": 10000,
+    "Status": 0
   }
 ]
